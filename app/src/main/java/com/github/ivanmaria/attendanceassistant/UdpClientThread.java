@@ -13,11 +13,10 @@ public class UdpClientThread extends Thread{
 
     String dstAddress,Num;
     int dstPort;
-    private boolean running;
     StudentClient.UdpClientHandler handler;
-
     DatagramSocket socket;
     InetAddress address;
+    private boolean running;
 
     public UdpClientThread(String addr, int port, StudentClient.UdpClientHandler handler, String Num) {
         super();
@@ -67,6 +66,8 @@ public class UdpClientThread extends Thread{
 
             handler.sendMessage(
                     Message.obtain(handler, StudentClient.UdpClientHandler.UPDATE_MSG, line));
+            handler.sendEmptyMessage(StudentClient.UdpClientHandler.UPDATE_END);
+
 
         } catch (SocketException e) {
             e.printStackTrace();
@@ -77,7 +78,7 @@ public class UdpClientThread extends Thread{
         } finally {
             if(socket != null){
                 socket.close();
-                handler.sendEmptyMessage(StudentClient.UdpClientHandler.UPDATE_END);
+                //handler.sendEmptyMessage(StudentClient.UdpClientHandler.UPDATE_END);
             }
         }
 
