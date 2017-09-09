@@ -47,7 +47,6 @@ public class TeacherServer extends AppCompatActivity {
         textViewState = (TextView)findViewById(R.id.state);
         textViewPrompt = (TextView)findViewById(R.id.prompt);
         btn = (Button) findViewById(R.id.button);
-        infoIp.setText(getIpAddress());
     }
 
     @Override
@@ -78,6 +77,7 @@ public class TeacherServer extends AppCompatActivity {
     }
 
     public void AttendanceBtn(View v) {
+        infoIp.setText(getIpAddress());
         WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (btn.getText().toString().equals("Take Attendance") || btn.getText().toString().equals("Try Again!")) {
             btn.setText("Stop");

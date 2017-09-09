@@ -7,12 +7,6 @@
     tools:context="com.github.ivanmaria.attendanceassistant.TeacherServer">
 
     <TextView
-        android:id="@+id/infoip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="italic" />
-
-    <TextView
         android:id="@+id/state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +19,12 @@
         android:layout_height="wrap_content"
         android:onClick="AttendanceBtn"
         android:text="Take Attendance" />
+
+    <TextView
+        android:id="@+id/infoip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic" />
 
     <ScrollView
         android:layout_width="match_parent"
