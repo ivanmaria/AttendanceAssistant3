@@ -3,18 +3,20 @@ package com.github.ivanmaria.attendanceassistant;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -25,19 +27,21 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class TeacherServer extends AppCompatActivity {
 
     static final int UdpServerPORT = 4445;
     private final static String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_WRITE_SETTINGS = 1;
-    private static String SSID = "Test";
-    private static String PASS = "12345678";
+    private static String SSID;
+    private static String PASS;
     TextView infoIp;
+    Spinner spinner;
     TextView textViewState, textViewPrompt;
-    Button btn;
-    Context context;
+    Button btn, selsub2;
     UdpServerThread udpServerThread;
 
     @Override
@@ -48,24 +52,24 @@ public class TeacherServer extends AppCompatActivity {
         textViewState = (TextView)findViewById(R.id.state);
         textViewPrompt = (TextView)findViewById(R.id.prompt);
         btn = (Button) findViewById(R.id.button);
+        selsub2 = (Button) findViewById(R.id.selsub);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        SharedPreferences sharedpreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        int num = sharedpreferences.getInt("TotalSubject", 0);
+        List<String> list = new ArrayList<String>();
+        for (int i = 1; i <= num; i++) {
+            list.add(sharedpreferences.getString("Subject" + i, ""));
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (isHotspotOn()) {
-            setWifiTetheringEnabled(false);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    setWifiTetheringEnabled(true);
-                }
-            }, 2500);
-        } else {
-            setWifiTetheringEnabled(true);
-        }
-
+        setWifiTetheringEnabled(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.System.canWrite(this)) {
             new AlertDialog.Builder(this)
                     .setMessage("Allow reading/writing the system settings? Necessary to set up access points.")
@@ -207,6 +211,16 @@ public class TeacherServer extends AppCompatActivity {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void SelectSub(View v) {
+        SSID = String.valueOf(spinner.getSelectedItem());
+        PASS = "password_" + SSID;
+        setWifiTetheringEnabled(true);
+        textViewState.setVisibility(View.VISIBLE);
+        btn.setVisibility(View.VISIBLE);
+        infoIp.setVisibility(View.VISIBLE);
+        textViewPrompt.setVisibility(View.VISIBLE);
     }
 
     private class UdpServerThread extends Thread{

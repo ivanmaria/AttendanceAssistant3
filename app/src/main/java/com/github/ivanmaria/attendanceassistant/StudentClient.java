@@ -1,6 +1,7 @@
 package com.github.ivanmaria.attendanceassistant;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -8,19 +9,25 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class StudentClient extends AppCompatActivity {
 
-    private static String SSID = "Test";
-    private static String PASS = "12345678";
+    private static String SSID;
+    private static String PASS;
     //EditText editTextAddress;
-    Button buttonConnect;
+    Button buttonConnect, selsub;
     EditText ip1, ip2, ip3, ip4;
     TextView textViewState, textViewRx;
+    Spinner spinner2;
     int netId;
     UdpClientHandler udpClientHandler;
     UdpClientThread udpClientThread;
@@ -35,33 +42,44 @@ public class StudentClient extends AppCompatActivity {
         ip2 = (EditText) findViewById(R.id.ip2);
         ip3 = (EditText) findViewById(R.id.ip3);
         ip4 = (EditText) findViewById(R.id.ip4);
-
+        selsub = (Button) findViewById(R.id.selsub);
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
         buttonConnect = (Button) findViewById(R.id.connect);
         textViewState = (TextView)findViewById(R.id.state);
         textViewRx = (TextView)findViewById(R.id.received);
         udpClientHandler = new UdpClientHandler(this);
-
+        SharedPreferences sharedpreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        int num = sharedpreferences.getInt("TotalSubject", 0);
+        List<String> list = new ArrayList<String>();
+        for (int i = 1; i <= num; i++) {
+            list.add(sharedpreferences.getString("Subject" + i, ""));
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(dataAdapter);
     }
 
     @Override
     protected void onStart() {
-        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         super.onStart();
-        wifiManager.setWifiEnabled(true);
-        WifiConnect();
     }
 
     public void buttonConnectOnClickListener(View v) {
-        ipAddress = ip1.getText().toString() + "." + ip2.getText().toString() + "." + ip3.getText().toString() + "." + ip4.getText().toString();
-        WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        if (wifiMgr.isWifiEnabled()) {
-            buttonConnect.setText("Give Attendance");
-            udpClientThread = new UdpClientThread(ipAddress, 4445, udpClientHandler, Num);
-            udpClientThread.start();
-            buttonConnect.setEnabled(false);
+        if (ip1.getText().toString().equals("") || ip2.getText().toString().equals("") || ip3.getText().toString().equals("") || ip4.getText().toString().equals("")) {
+            textViewState.setText("Enter Code Properly!");
         } else {
-            buttonConnect.setText("Error! Try Again");
-            WifiConnect();
+            ipAddress = ip1.getText().toString() + "." + ip2.getText().toString() + "." + ip3.getText().toString() + "." + ip4.getText().toString();
+            WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            if (wifiMgr.isWifiEnabled()) {
+                buttonConnect.setText("Give Attendance");
+                udpClientThread = new UdpClientThread(ipAddress, 4445, udpClientHandler, Num);
+                udpClientThread.start();
+                buttonConnect.setEnabled(false);
+            } else {
+                buttonConnect.setText("Error! Try Again");
+                WifiConnect();
+            }
         }
     }
 
@@ -91,6 +109,21 @@ public class StudentClient extends AppCompatActivity {
         wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);
         wifiManager.reconnect();
+    }
+
+    public void SelectSubject(View v) {
+        SSID = String.valueOf(spinner2.getSelectedItem());
+        PASS = "password_" + SSID;
+        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(true);
+        WifiConnect();
+        ip1.setVisibility(View.VISIBLE);
+        ip2.setVisibility(View.VISIBLE);
+        ip3.setVisibility(View.VISIBLE);
+        ip4.setVisibility(View.VISIBLE);
+        buttonConnect.setVisibility(View.VISIBLE);
+        textViewState.setVisibility(View.VISIBLE);
+        textViewRx.setVisibility(View.VISIBLE);
     }
 
     public static class UdpClientHandler extends Handler {

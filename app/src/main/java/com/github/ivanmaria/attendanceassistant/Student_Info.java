@@ -81,6 +81,7 @@ public class Student_Info extends AppCompatActivity {
             status.setText("Add ateast 1 subject");
         } else {
             startActivity(in);
+            finish();
         }
     }
 }

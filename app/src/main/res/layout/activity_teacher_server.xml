@@ -3,33 +3,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.github.ivanmaria.attendanceassistant.TeacherServer">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/selsub2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SelectSub"
+        android:text="Select Subject" />
 
     <TextView
         android:id="@+id/state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="un-initiated"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="AttendanceBtn"
-        android:text="Take Attendance" />
+        android:text="Take Attendance"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/infoip"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:visibility="invisible" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="150dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +57,8 @@
                 android:id="@+id/prompt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
 
