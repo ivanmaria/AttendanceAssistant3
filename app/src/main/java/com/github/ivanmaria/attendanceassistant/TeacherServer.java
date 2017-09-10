@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -52,13 +53,19 @@ public class TeacherServer extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setWifiTetheringEnabled(false);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                setWifiTetheringEnabled(true);
-            }
-        }, 5000);
+
+        if (isHotspotOn()) {
+            setWifiTetheringEnabled(false);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    setWifiTetheringEnabled(true);
+                }
+            }, 2500);
+        } else {
+            setWifiTetheringEnabled(true);
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.System.canWrite(this)) {
             new AlertDialog.Builder(this)
                     .setMessage("Allow reading/writing the system settings? Necessary to set up access points.")
@@ -77,8 +84,8 @@ public class TeacherServer extends AppCompatActivity {
     }
 
     public void AttendanceBtn(View v) {
-        infoIp.setText(getIpAddress());
-        WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        String parts[] = getIpAddress().split("\\.");
+        infoIp.setText("Code Generated: " + parts[1] + "    " + parts[2] + "    " + parts[3] + "    " + parts[4]);
         if (btn.getText().toString().equals("Take Attendance") || btn.getText().toString().equals("Try Again!")) {
             btn.setText("Stop");
             udpServerThread = new UdpServerThread(UdpServerPORT);
@@ -97,6 +104,7 @@ public class TeacherServer extends AppCompatActivity {
         if(udpServerThread != null){
             udpServerThread.setRunning(false);
             udpServerThread = null;
+            setWifiTetheringEnabled(false);
         }
 
         super.onStop();
@@ -134,7 +142,7 @@ public class TeacherServer extends AppCompatActivity {
                     InetAddress inetAddress = enumInetAddress.nextElement();
 
                     if (inetAddress.isSiteLocalAddress()) {
-                        ip += "SiteLocalAddress: "
+                        ip += "."
                                 + inetAddress.getHostAddress() + "\n";
                     }
 
@@ -183,6 +191,22 @@ public class TeacherServer extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    public boolean isHotspotOn() {
+        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        try {
+            int apState = (Integer) wifiManager.getClass().getMethod("getWifiApState").invoke(wifiManager);
+            if (apState == 13)
+                return true;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private class UdpServerThread extends Thread{

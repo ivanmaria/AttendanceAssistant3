@@ -17,39 +17,46 @@ public class StudentClient extends AppCompatActivity {
 
     private static String SSID = "Test";
     private static String PASS = "12345678";
-    EditText editTextAddress;
+    //EditText editTextAddress;
     Button buttonConnect;
+    EditText ip1, ip2, ip3, ip4;
     TextView textViewState, textViewRx;
     int netId;
     UdpClientHandler udpClientHandler;
     UdpClientThread udpClientThread;
     String Num="46";
+    String ipAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_client);
+        ip1 = (EditText) findViewById(R.id.ip1);
+        ip2 = (EditText) findViewById(R.id.ip2);
+        ip3 = (EditText) findViewById(R.id.ip3);
+        ip4 = (EditText) findViewById(R.id.ip4);
 
-        editTextAddress = (EditText) findViewById(R.id.address);
         buttonConnect = (Button) findViewById(R.id.connect);
         textViewState = (TextView)findViewById(R.id.state);
         textViewRx = (TextView)findViewById(R.id.received);
         udpClientHandler = new UdpClientHandler(this);
+
     }
 
     @Override
     protected void onStart() {
+        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         super.onStart();
-        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(true);
         WifiConnect();
     }
 
     public void buttonConnectOnClickListener(View v) {
+        ipAddress = ip1.getText().toString() + "." + ip2.getText().toString() + "." + ip3.getText().toString() + "." + ip4.getText().toString();
         WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiMgr.isWifiEnabled()) {
             buttonConnect.setText("Give Attendance");
-            udpClientThread = new UdpClientThread(editTextAddress.getText().toString(), 4445, udpClientHandler, Num);
+            udpClientThread = new UdpClientThread(ipAddress, 4445, udpClientHandler, Num);
             udpClientThread.start();
             buttonConnect.setEnabled(false);
         } else {
