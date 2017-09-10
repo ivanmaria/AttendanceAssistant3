@@ -23,6 +23,7 @@ public class StudentClient extends AppCompatActivity {
 
     private static String SSID;
     private static String PASS;
+    private static String Num;
     //EditText editTextAddress;
     Button buttonConnect, selsub;
     EditText ip1, ip2, ip3, ip4;
@@ -31,7 +32,6 @@ public class StudentClient extends AppCompatActivity {
     int netId;
     UdpClientHandler udpClientHandler;
     UdpClientThread udpClientThread;
-    String Num="46";
     String ipAddress;
 
     @Override
@@ -49,9 +49,11 @@ public class StudentClient extends AppCompatActivity {
         textViewRx = (TextView)findViewById(R.id.received);
         udpClientHandler = new UdpClientHandler(this);
         SharedPreferences sharedpreferences = getSharedPreferences("settings", MODE_PRIVATE);
-        int num = sharedpreferences.getInt("TotalSubject", 0);
+        int n = sharedpreferences.getInt("TotalSubject", 0);
+        Num = sharedpreferences.getString("Roll No", "");
+
         List<String> list = new ArrayList<String>();
-        for (int i = 1; i <= num; i++) {
+        for (int i = 1; i <= n; i++) {
             list.add(sharedpreferences.getString("Subject" + i, ""));
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,

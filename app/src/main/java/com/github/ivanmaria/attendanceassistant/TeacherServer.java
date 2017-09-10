@@ -1,6 +1,5 @@
 package com.github.ivanmaria.attendanceassistant;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -36,8 +34,8 @@ public class TeacherServer extends AppCompatActivity {
     static final int UdpServerPORT = 4445;
     private final static String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_WRITE_SETTINGS = 1;
-    private static String SSID;
-    private static String PASS;
+    private static String SSID = "test";
+    private static String PASS = "password";
     TextView infoIp;
     Spinner spinner;
     TextView textViewState, textViewPrompt;
@@ -52,7 +50,7 @@ public class TeacherServer extends AppCompatActivity {
         textViewState = (TextView)findViewById(R.id.state);
         textViewPrompt = (TextView)findViewById(R.id.prompt);
         btn = (Button) findViewById(R.id.button);
-        selsub2 = (Button) findViewById(R.id.selsub);
+        selsub2 = (Button) findViewById(R.id.selsub2);
         spinner = (Spinner) findViewById(R.id.spinner);
         SharedPreferences sharedpreferences = getSharedPreferences("settings", MODE_PRIVATE);
         int num = sharedpreferences.getInt("TotalSubject", 0);
@@ -166,7 +164,7 @@ public class TeacherServer extends AppCompatActivity {
     public void setWifiTetheringEnabled(boolean enable) {
         //Log.d(TAG,"setWifiTetheringEnabled: "+enable);
 
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 
         if (enable) {
             wifiManager.setWifiEnabled(!enable);    // Disable all existing WiFi Network
@@ -197,21 +195,6 @@ public class TeacherServer extends AppCompatActivity {
         }
     }
 
-    public boolean isHotspotOn() {
-        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        try {
-            int apState = (Integer) wifiManager.getClass().getMethod("getWifiApState").invoke(wifiManager);
-            if (apState == 13)
-                return true;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public void SelectSub(View v) {
         SSID = String.valueOf(spinner.getSelectedItem());

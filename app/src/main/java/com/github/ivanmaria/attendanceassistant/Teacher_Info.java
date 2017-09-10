@@ -67,12 +67,17 @@ public class Teacher_Info extends AppCompatActivity {
     }
 
     public void Submit(View v) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
         Intent in = new Intent(Teacher_Info.this, TeacherServer.class);
         if (fname.getText().toString().equals("") || lname.getText().equals("")) {
             status.setText("Enter Name & Surname");
         } else if (TotalSubject == 0) {
             status.setText("Add ateast 1 subject");
         } else {
+            editor.putString("First Name", fname.getText().toString());
+            editor.putString("Last  Name", lname.getText().toString());
+            editor.putString("Setup", "true");
+            editor.commit();
             startActivity(in);
             finish();
         }

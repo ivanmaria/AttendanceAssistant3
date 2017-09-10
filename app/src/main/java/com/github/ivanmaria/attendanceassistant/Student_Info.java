@@ -70,6 +70,7 @@ public class Student_Info extends AppCompatActivity {
     }
 
     public void Submit(View v) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
         Intent in = new Intent(Student_Info.this, StudentClient.class);
         if (fname.getText().toString().equals("") || lname.getText().equals("")) {
             status.setText("Enter Name & Surname");
@@ -80,6 +81,13 @@ public class Student_Info extends AppCompatActivity {
         } else if (TotalSubject == 0) {
             status.setText("Add ateast 1 subject");
         } else {
+            editor.putString("First Name", fname.getText().toString());
+            editor.putString("Last  Name", lname.getText().toString());
+            editor.putString("Year", year.getText().toString());
+            editor.putString("Branch", branch.getText().toString());
+            editor.putString("Roll No", rollno.getText().toString());
+            editor.putString("Setup", "true");
+            editor.commit();
             startActivity(in);
             finish();
         }
