@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
 
                 try {
-                    sleep(2 * 1000);
+                    sleep(1 * 1000);
                     String initial = sharedpreferences.getString("Setup", "");
                     String profession = sharedpreferences.getString("Profession", "");
                     if (initial.equals("true") && profession.equals("Teacher")) {

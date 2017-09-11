@@ -4,8 +4,34 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">#f44336</item>
+        <item name="colorAccent">#3F51B5</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">#424242</item>
+        <item name="android:textColorHint">#757575</item>
     </style>
+
+    <style name="ButtonColor" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/background</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">#f44336</item>
+    </style>
+
+    <style name="ButtonColor2" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/background</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">#3F51B5</item>
+    </style>
+
+    <style name="ButtonColor3" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">#f44336</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="ButtonColor4" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">#3F51B5</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
 
 </resources>

@@ -4,22 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_marginTop="100dp"
     tools:context="com.github.ivanmaria.attendanceassistant.MainActivity">
 
-    <Button
-        android:id="@+id/teacher"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="TeacherBtn"
-        android:text="Teacher" />
+        android:layout_weight="0.5"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="StudentBtn"
-        android:text="Student" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="303dp"
+            android:layout_weight="0.5"
+            android:onClick="TeacherBtn"
+            app:srcCompat="@drawable/teacher" />
+
+        <Button
+            android:id="@+id/teacher"
+            style="@style/ButtonColor3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="bottom"
+            android:onClick="TeacherBtn"
+            android:text="Teacher"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="183dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.12"
+            android:onClick="StudentBtn"
+            app:srcCompat="@drawable/student" />
+
+        <Button
+            android:id="@+id/student"
+            style="@style/ButtonColor4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13"
+            android:gravity="bottom"
+            android:onClick="StudentBtn"
+            android:text="Student"
+            android:textAlignment="center" />
+    </LinearLayout>
+
 </LinearLayout>

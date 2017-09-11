@@ -96,6 +96,10 @@ public class StudentClient extends AppCompatActivity {
     private void clientEnd(){
         udpClientThread = null;
         textViewState.setText("Disconnected!");
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        wifiManager.removeNetwork(netId);
+        wifiManager.saveConfiguration();
+        wifiManager.disconnect();
         buttonConnect.setEnabled(true);
         buttonConnect.setVisibility(View.GONE);
 
@@ -106,7 +110,7 @@ public class StudentClient extends AppCompatActivity {
         wifiConfig.SSID = String.format("\"%s\"", SSID);
         wifiConfig.preSharedKey = String.format("\"%s\"", PASS);
 
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         netId = wifiManager.addNetwork(wifiConfig);
         wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);

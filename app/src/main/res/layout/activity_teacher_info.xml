@@ -12,6 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
         <EditText
             android:id="@+id/fname"
             android:layout_width="match_parent"
@@ -19,8 +23,15 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#424242" />
+        </android.support.design.widget.TextInputLayout>
 
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
         <EditText
             android:id="@+id/lname"
             android:layout_width="match_parent"
@@ -28,7 +39,10 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="Surname"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#424242" />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -44,16 +58,24 @@
             android:orientation="vertical">
 
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
             <EditText
                 android:id="@+id/subcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Subject Code"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="#424242" />
+            </android.support.design.widget.TextInputLayout>
+
 
             <Button
                 android:id="@+id/addsub"
+                style="@style/ButtonColor2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="AddSubject"
@@ -61,6 +83,7 @@
 
             <Button
                 android:id="@+id/clearsub"
+                style="@style/ButtonColor2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="ClearSubject"
@@ -117,6 +140,7 @@
 
     <Button
         android:id="@+id/submit"
+        style="@style/ButtonColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="Submit"

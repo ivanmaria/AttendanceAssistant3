@@ -14,6 +14,7 @@
 
     <Button
         android:id="@+id/selsub2"
+        style="@style/ButtonColor2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SelectSub"
@@ -30,6 +31,7 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/ButtonColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="AttendanceBtn"

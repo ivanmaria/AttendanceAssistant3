@@ -14,6 +14,7 @@
 
     <Button
         android:id="@+id/selsub"
+        style="@style/ButtonColor2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SelectSubject"
@@ -65,6 +66,7 @@
 
     <Button
         android:id="@+id/connect"
+        style="@style/ButtonColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="buttonConnectOnClickListener"
