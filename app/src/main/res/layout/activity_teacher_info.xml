@@ -21,6 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
@@ -37,7 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
             android:ems="10"
+
             android:hint="Surname"
             android:inputType="textPersonName"
             android:textColor="#424242" />
@@ -66,7 +70,9 @@
                 android:id="@+id/subcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#BDBDBD"
                 android:ems="10"
+
                 android:hint="Subject Code"
                 android:inputType="textPersonName"
                 android:textColor="#424242" />

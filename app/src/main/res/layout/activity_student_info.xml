@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="#BDBDBD"
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName"
@@ -37,8 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
             android:ems="10"
             android:hint="Surname"
+
             android:inputType="textPersonName"
             android:textColor="#424242" />
         </android.support.design.widget.TextInputLayout>
@@ -59,7 +62,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
             android:ems="10"
+
             android:hint="Year/Class"
             android:inputType="textPersonName"
             android:textColor="#424242" />
@@ -75,6 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:hint="Branch/Division"
             android:inputType="textPersonName"
@@ -91,7 +98,9 @@
             android:id="@+id/rollno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#BDBDBD"
             android:ems="10"
+
             android:hint="Roll Number"
             android:inputType="number"
             android:textColor="#424242" />
@@ -118,6 +127,8 @@
                 android:id="@+id/subcode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#BDBDBD"
+
                 android:ems="10"
                 android:hint="Subject Code"
                 android:inputType="textPersonName"

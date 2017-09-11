@@ -10,7 +10,9 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:popupBackground="#F5F5F5" />
 
     <Button
         android:id="@+id/selsub2"

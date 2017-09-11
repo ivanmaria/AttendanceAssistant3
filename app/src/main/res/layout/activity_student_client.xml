@@ -10,7 +10,9 @@
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:popupBackground="#F5F5F5" />
 
     <Button
         android:id="@+id/selsub"
@@ -30,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:inputType="number"
             android:text="192"
@@ -40,6 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:inputType="number"
             android:text="168"
@@ -50,6 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:inputType="number"
             android:visibility="invisible" />
@@ -59,6 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#BDBDBD"
+
             android:ems="10"
             android:inputType="number"
             android:visibility="invisible" />
