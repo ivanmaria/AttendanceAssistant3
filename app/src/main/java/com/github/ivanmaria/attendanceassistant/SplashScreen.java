@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
     SharedPreferences sharedpreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

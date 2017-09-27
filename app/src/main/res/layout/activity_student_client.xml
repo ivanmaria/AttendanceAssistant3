@@ -5,13 +5,16 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context="com.github.ivanmaria.attendanceassistant.StudentClient">
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.09"
+        android:background="#E0E0E0"
         android:popupBackground="#F5F5F5" />
 
     <Button
@@ -33,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BDBDBD"
-
             android:ems="10"
             android:inputType="number"
             android:text="192"
+            android:textColor="#000000"
             android:visibility="invisible" />
 
         <EditText
@@ -45,10 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BDBDBD"
-
             android:ems="10"
             android:inputType="number"
             android:text="168"
+            android:textColor="#000000"
             android:visibility="invisible" />
 
         <EditText
@@ -57,9 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BDBDBD"
-
             android:ems="10"
             android:inputType="number"
+            android:textColor="#000000"
             android:visibility="invisible" />
 
         <EditText
@@ -68,9 +71,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#BDBDBD"
-
             android:ems="10"
+
             android:inputType="number"
+            android:textColor="#000000"
             android:visibility="invisible" />
     </LinearLayout>
 

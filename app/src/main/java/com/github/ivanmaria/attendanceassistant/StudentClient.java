@@ -77,7 +77,6 @@ public class StudentClient extends AppCompatActivity {
                 buttonConnect.setText("Give Attendance");
                 udpClientThread = new UdpClientThread(ipAddress, 4445, udpClientHandler, Num);
                 udpClientThread.start();
-                buttonConnect.setEnabled(false);
             } else {
                 buttonConnect.setText("Error! Try Again");
                 WifiConnect();
@@ -100,7 +99,7 @@ public class StudentClient extends AppCompatActivity {
         wifiManager.removeNetwork(netId);
         wifiManager.saveConfiguration();
         wifiManager.disconnect();
-        buttonConnect.setEnabled(true);
+        buttonConnect.setEnabled(false);
         buttonConnect.setVisibility(View.GONE);
 
     }
@@ -123,6 +122,7 @@ public class StudentClient extends AppCompatActivity {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(true);
         WifiConnect();
+
         ip1.setVisibility(View.VISIBLE);
         ip2.setVisibility(View.VISIBLE);
         ip3.setVisibility(View.VISIBLE);

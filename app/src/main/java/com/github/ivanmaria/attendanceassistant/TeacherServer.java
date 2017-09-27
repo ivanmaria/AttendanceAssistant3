@@ -8,6 +8,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -93,9 +94,11 @@ public class TeacherServer extends AppCompatActivity {
             udpServerThread = new UdpServerThread(UdpServerPORT);
             udpServerThread.start();
         } else if (btn.getText().toString().equals("Stop")) {
-            setWifiTetheringEnabled(false);
             btn.setText("Take Attendance");
-            btn.setEnabled(false);
+            setWifiTetheringEnabled(false);
+            textViewState.setVisibility(View.INVISIBLE);
+            btn.setVisibility(View.INVISIBLE);
+            infoIp.setVisibility(View.INVISIBLE);
         } else {
             btn.setText("Try Again!");
         }
@@ -200,10 +203,17 @@ public class TeacherServer extends AppCompatActivity {
         SSID = String.valueOf(spinner.getSelectedItem());
         PASS = "password_" + SSID;
         setWifiTetheringEnabled(true);
-        textViewState.setVisibility(View.VISIBLE);
-        btn.setVisibility(View.VISIBLE);
-        infoIp.setVisibility(View.VISIBLE);
-        textViewPrompt.setVisibility(View.VISIBLE);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textViewState.setVisibility(View.VISIBLE);
+                btn.setVisibility(View.VISIBLE);
+                infoIp.setVisibility(View.VISIBLE);
+                textViewPrompt.setVisibility(View.VISIBLE);
+            }
+        }, 500);
+
     }
 
     private class UdpServerThread extends Thread{
@@ -228,10 +238,10 @@ public class TeacherServer extends AppCompatActivity {
             running = true;
 
             try {
-                updateState("Initializing Attendance. Please Wait!");
+                updateState("Taking Attendance...!");
                 socket = new DatagramSocket(serverPort);
 
-                updateState("Taking Attendance...");
+                updateState("Ready to take Attendance!");
                 Log.e(TAG, "UDP Server is running");
 
                 while(running){

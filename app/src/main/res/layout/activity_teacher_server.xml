@@ -5,13 +5,16 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context="com.github.ivanmaria.attendanceassistant.TeacherServer">
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="0.14"
+        android:background="#E0E0E0"
         android:popupBackground="#F5F5F5" />
 
     <Button

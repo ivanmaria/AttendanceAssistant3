@@ -33,5 +33,6 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
         Intent in = new Intent(MainActivity.this, Student_Info.class);
         startActivity(in);
+        finish();
     }
 }

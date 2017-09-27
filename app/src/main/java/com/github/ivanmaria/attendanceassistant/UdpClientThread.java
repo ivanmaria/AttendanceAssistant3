@@ -55,7 +55,7 @@ public class UdpClientThread extends Thread{
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, dstPort);
             socket.send(packet);
 
-            sendState("connected");
+            sendState("Error..! Try Again");
 
             // get response
             packet = new DatagramPacket(buf, buf.length);
@@ -67,8 +67,7 @@ public class UdpClientThread extends Thread{
             handler.sendMessage(
                     Message.obtain(handler, StudentClient.UdpClientHandler.UPDATE_MSG, line));
             handler.sendEmptyMessage(StudentClient.UdpClientHandler.UPDATE_END);
-
-
+            //sendState("Error! Try Again");
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {
